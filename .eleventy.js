@@ -31,10 +31,16 @@ module.exports = function (eleventyConfig) {
     "./node_modules/prismjs/themes/prism-tomorrow.css":
       "./static/css/prism-tomorrow.css",
   });
-
+  eleventyConfig.addCollection("tires", (collectionApi) => {
+    return collectionApi
+      .getFilteredByGlob("src/content/tires/*.md")
+      .sort((a, b) =>
+        (a.data.brand + a.data.model).localeCompare(b.data.brand + b.data.model)
+      );
+  });
   // Copy Image Folder to /_site
   eleventyConfig.addPassthroughCopy("./src/static/img");
-
+  eleventyConfig.addPassthroughCopy("./src/static/css");
   // Copy favicon to route of /_site
   eleventyConfig.addPassthroughCopy("./src/favicon.ico");
 

@@ -1,0 +1,26 @@
+---
+layout: "default.html"
+pagination:
+  data: collections.tires
+  size: 1
+  alias: tire
+permalink: "tires/{{ tire.data.sku | slug }}/"
+---
+<article>
+  <h1>{{ tire.data.brand }}
+    {{ tire.data.model }}</h1>
+  <p class="meta">{{ tire.data.size }} • {{ tire.data.category }} • ${{ tire.data.price }}</p>
+
+  {% if tire.data.images %}
+    <img src="{{ tire.data.images[0].src }}" alt="{{ tire.data.title }}"/>
+  {% endif %}
+
+  <ul>
+    <li>SKU: {{ tire.data.sku }}</li>
+    <li>Load Index: {{ tire.data.loadIndex or "-" }}</li>
+    <li>Speed Rating: {{ tire.data.speedRating or "-" }}</li>
+    <li>Stock: {{ tire.data.inStock ? "Available" : "Out of stock" }}</li>
+  </ul>
+
+  {{ tire.templateContent | safe }}
+</article>

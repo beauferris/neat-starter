@@ -1,0 +1,24 @@
+---
+layout: "default.html"
+title: "Tires"
+---
+<h1 class="govuk-heading-l">Tires</h1>
+
+<div class="cards">
+  {% for t in collections.tires %}
+    <article class="card">
+      <a href="{{ t.url }}">
+        <img src="{{ (t.data.images and t.data.images[0].src) or '/assets/images/tires/placeholder.jpg' }}" alt="{{ t.data.title }}"/>
+      </a>
+      <h3>
+        <a href="{{ t.url }}">{{ t.data.brand }}
+          {{ t.data.model }}</a>
+      </h3>
+      <p>{{ t.data.size }} — ${{ t.data.price }}</p>
+      {% if t.data.inStock %}
+        <span class="badge">In stock</span>
+      {% else %}
+        <span class="badge out">Out of stock</span>{% endif %}
+    </article>
+  {% endfor %}
+</div>
