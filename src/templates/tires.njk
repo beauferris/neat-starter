@@ -19,7 +19,7 @@ permalink: "tires/{{ tire.data.sku | slug }}/"
     <li>SKU: {{ tire.data.sku }}</li>
     <li>Load Index: {{ tire.data.loadIndex or "-" }}</li>
     <li>Speed Rating: {{ tire.data.speedRating or "-" }}</li>
-    <li>Stock: {{ tire.data.inStock ? "Available" : "Out of stock" }}</li>
+
   </ul>
 
   {{ tire.templateContent | safe }}
