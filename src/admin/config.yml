@@ -14,7 +14,7 @@ local_backend: true
 collections:
   - label: "Tires"
     name: "tires"
-    folder: "src/content/tires"
+    folder: "src/tires"
     create: true
     slug: "{{fields.sku}}" # keeps URLs stable even if title changes
     format: "frontmatter" # markdown with front matter; could be "json" if you prefer
