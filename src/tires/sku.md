@@ -11,4 +11,5 @@ rim: 2
 loadIndex: -7
 price: 123
 inStock: true
+permalink: false
 ---

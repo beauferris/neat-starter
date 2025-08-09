@@ -7,11 +7,11 @@ title: "Tires"
 <div class="cards">
   {% for t in collections.tires %}
     <article class="card">
-      <a href="{{ t.url }}">
+      <a href="{{ t.data.sku | slugify }}">
         <img src="{{ (t.data.images and t.data.images[0].src) or '/assets/images/tires/placeholder.jpg' }}" alt="{{ t.data.title }}"/>
       </a>
       <h3>
-        <a href="{{ t.url }}">{{ t.data.brand }}
+        <a href="{{ t.data.sku | slugify }}">{{ t.data.brand }}
           {{ t.data.model }}</a>
       </h3>
       <p>{{ t.data.size }} — ${{ t.data.price }}</p>
