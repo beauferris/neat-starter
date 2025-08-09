@@ -4,6 +4,11 @@ const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const htmlmin = require("html-minifier");
 
 module.exports = function (eleventyConfig) {
+  // put near the top of your config
+  eleventyConfig.addWatchTarget("src/admin"); // hot-reload when config changes
+
+  // publish the entire CMS app (index.html, config.yml, any custom widgets)
+  eleventyConfig.addPassthroughCopy({ "src/admin": "admin" });
   // Disable automatic use of your .gitignore
   eleventyConfig.setUseGitIgnore(false);
 
@@ -26,7 +31,6 @@ module.exports = function (eleventyConfig) {
 
   // Copy Static Files to /_Site
   eleventyConfig.addPassthroughCopy({
-    "./src/admin/config.yml": "./admin/config.yml",
     "./node_modules/alpinejs/dist/cdn.min.js": "./static/js/alpine.js",
     "./node_modules/prismjs/themes/prism-tomorrow.css":
       "./static/css/prism-tomorrow.css",
