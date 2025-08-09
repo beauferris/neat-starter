@@ -12,6 +12,55 @@ public_folder: "/static/img"
 local_backend: true
 # publish_mode: editorial_workflow
 collections:
+  - label: "Tires"
+    name: "tires"
+    folder: "src/content/tires"
+    create: true
+    slug: "{{fields.sku}}" # keeps URLs stable even if title changes
+    format: "frontmatter" # markdown with front matter; could be "json" if you prefer
+    fields:
+      - { name: "title", label: "Title" } # e.g., "Michelin Pilot Sport All Season 4"
+      - { name: "sku", label: "SKU" }
+      - { name: "brand", label: "Brand" }
+      - { name: "model", label: "Model" }
+      - {
+          name: "category",
+          label: "Category",
+          widget: "select",
+          options:
+            ["All-Season", "Winter", "Summer", "All-Terrain", "Performance"],
+        }
+      - { name: "size", label: "Display Size", hint: "e.g. 225/45R17" }
+      - { name: "width", label: "Section Width (mm)", widget: "number" }
+      - { name: "aspect", label: "Aspect Ratio", widget: "number" }
+      - { name: "rim", label: "Rim (inches)", widget: "number" }
+      - {
+          name: "loadIndex",
+          label: "Load Index",
+          widget: "number",
+          required: false,
+        }
+      - { name: "speedRating", label: "Speed Rating", required: false }
+      - {
+          name: "price",
+          label: "Price",
+          widget: "number",
+          value_type: "float",
+          min: 0,
+        }
+      - { name: "inStock", label: "In Stock", widget: "boolean", default: true }
+      - {
+          name: "images",
+          label: "Images",
+          widget: "list",
+          field: { name: "src", label: "Image", widget: "image" },
+        }
+      - {
+          name: "body",
+          label: "Description",
+          widget: "markdown",
+          required: false,
+        }
   - label: "Blog"
     name: "blog"
     folder: "src/posts"
