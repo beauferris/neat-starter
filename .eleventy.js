@@ -33,7 +33,7 @@ module.exports = function (eleventyConfig) {
   });
   eleventyConfig.addCollection("tires", (collectionApi) => {
     return collectionApi
-      .getFilteredByGlob("src/content/tires/*.md")
+      .getFilteredByGlob("src/tires/*.md")
       .sort((a, b) =>
         (a.data.brand + a.data.model).localeCompare(b.data.brand + b.data.model)
       );
