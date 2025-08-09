@@ -1,0 +1,30 @@
+<div>
+  {% if price %}
+    <div class="course-info-container">
+      <span>
+        <h2 class="govuk-heading-l">
+          {{ price }}
+        </h2>
+        <p>+GST</p>
+      </span>
+    </div>
+  {% endif %}
+
+  {% if duration %}
+    <div class="course-info-container">
+      <h2 >Duration</h2>
+      <p class="govuk-body">
+        {{ duration }}
+      </p>
+    </div>
+  {% endif %}
+
+  {% if type %}
+    <div class="course-info-container">
+      <h2>Course Type </h2>
+      <p class="govuk-body">
+        {{ type }}
+      </p>
+    </div>
+  {% endif %}
+</div>

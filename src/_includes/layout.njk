@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" class="govuk-template">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"/>
+    {% set pageTitle = seo.title or title or site.name %}
+    {% set metaDescription = seo.description or description or site.description %}
+    <title>{{ site.name + " | " + title }}</title>
+    <meta name="description" content="{{ description }}">
+    <meta name="robots" content="{{ robots }}">
+
+    {# <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:type" content="{{ seo.type or 'website' }}"> #}
+
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css"/>
+    <script src="/scripts/main.js"></script>
+    <link rel="preload" href="/assets/images/logo.png" as="image" fetchpriority="high">
+  </head>
+
+  <body class="govuk-template__body">
+    {% include "partials/header.njk" %}
+    {# {% include "components/landing-full.njk" %} #}
+
+    <main class="govuk-main-wrapper" id="main-content">
+
+      <div >{{ content | safe }}</div>
+
+      {# {% include "partials/contact.njk" %}
+
+      {% include "partials/accordion.njk" %} #}
+
+    </div>
+  </main>
+  {# {% include "partials/footer.njk" %} #}
+</body>
+</html>

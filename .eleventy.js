@@ -42,6 +42,7 @@ module.exports = function (eleventyConfig) {
         (a.data.brand + a.data.model).localeCompare(b.data.brand + b.data.model)
       );
   });
+  eleventyConfig.addPassthroughCopy({ "src/scripts": "scripts" });
   // Copy Image Folder to /_site
   eleventyConfig.addPassthroughCopy("./src/static/img");
   eleventyConfig.addPassthroughCopy("./src/static/css");

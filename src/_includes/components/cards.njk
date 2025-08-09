@@ -1,0 +1,34 @@
+{% set color = bgColor %}
+<section class="{{color}} govuk-!-margin-top-0 govuk-!-padding-top-5 govuk-!-padding-bottom-7">
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row govuk-!-margin-top-7">
+      <div class="govuk-grid-column-full">
+        {% set header = collectionHeader %}
+        <h2 class="govuk-heading-l">
+          {{header}}</h2>
+        <div class="dfe-grid-container">
+          {% set items = collections[collectionName] %}
+          {% for post in items %}
+            <div class="dfe-card">
+              <img
+        src="{{ post.data.images[0] }}"
+        alt="{{ post.data.title }}"
+/>
+              <div class="dfe-card-container">
+                <h3 class="govuk-heading-m">
+                  <a
+            class="govuk-link govuk-link--no-visited-state dfe-card-link--header"
+            href="/tires/{{ post.data.sku | slugify }}"
+          >
+                    {{ post.data.title }}
+                  </a>
+                </h3>
+                <p class="govuk-body">{{ post.data.size }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

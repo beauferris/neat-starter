@@ -1,0 +1,27 @@
+<div class="landing">
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds" >
+        {% include "partials/breadcrumbs.njk" %}
+
+        <h2 style="color:white; margin:30px 0;max-width:35rem" class="govuk-heading-xl">{{title}}</h2>
+        <h2 class="govuk-body-lead" style="color:white" >{{description}}</h2>
+
+        {% if site.phone %}
+          <a style="margin-top:30px" href={{site.phone}} class="govuk-button govuk-button--start">{{site.phone_title}}</a>
+        {% endif %}
+      </div>
+
+      <div  class="govuk-grid-column-one-third">
+        {% set imagePath = "/assets/images/" + (
+        title | slug | lower) + ".png" %}
+
+        {% if imagePath %}
+          <img style="max-height:400px;border-radius:5px;object-fit: cover;
+    min-height: 400px;"  src={{imagePath}}  alt={{description}}/>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>

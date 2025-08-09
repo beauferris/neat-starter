@@ -1,0 +1,41 @@
+{% set headerClass = class %}
+
+<header class="{{headerClass}} govuk-header site-header" role="banner" data-module="govuk-header" style="padding-top:5px; border-bottom:1px solid #b1b4b6;">
+  <div class="govuk-header__container govuk-width-container">
+    <div class="govuk-header__logo">
+      <a href="/" class="govuk-header__link govuk-header__link--homepage">
+        <!-- Use your real intrinsic size (example 200x60). Adjust as needed. -->
+        {# <img
+          src="/assets/images/logo.png"
+          alt="Logo"
+          width="220px"
+          height="60px"
+          decoding="async"
+          fetchpriority="high"
+          style="width:220px; height:auto;"
+/> #} yo-yo tires
+      </a>
+    </div>
+    <button style="font-size:20px" id="menu-toggle" class="govuk-header__menu-button" type="button" aria-controls="navigation" aria-label="Show or hide navigation menu">
+      <strong>Menu</strong>
+    </button>
+  </div>
+  <div class="govuk-width-container">
+    <nav id="main-nav" class="govuk-header__navigation hide">
+      <ul id="navigation" class="govuk-header__navigation-list" aria-label="Top Level Navigation">
+        {% if navigation.items %}
+
+          {% for item in navigation.items %}
+
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="{{item.url}}">{{item.text}}</a>
+            </li>
+
+          {% endfor %}
+
+        {% endif %}
+
+      </ul>
+    </nav>
+  </div>
+</header>

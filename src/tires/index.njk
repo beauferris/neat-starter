@@ -1,5 +1,5 @@
 ---
-layout: "default.html"
+layout: "layout.njk"
 title: "Tires"
 ---
 <h1 class="govuk-heading-l">Tires</h1>
@@ -8,7 +8,7 @@ title: "Tires"
   {% for t in collections.tires %}
     <article class="card">
       <a href="{{ t.data.sku | slugify }}">
-        <img src="{{ (t.data.images and t.data.images[0].src) or '/assets/images/tires/placeholder.jpg' }}" alt="{{ t.data.title }}"/>
+        <img src="{{ t.data.images[0] }}" alt="{{ t.data.title }}">
       </a>
       <h3>
         <a href="{{ t.data.sku | slugify }}">{{ t.data.brand }}
