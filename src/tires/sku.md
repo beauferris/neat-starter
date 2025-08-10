@@ -4,7 +4,7 @@ sku: sku
 brand: brand
 model: model
 category: Winter
-size: 225-55R18
+size: 225/55R18
 width: 1
 aspect: 2
 rim: 2
