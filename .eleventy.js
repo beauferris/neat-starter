@@ -43,11 +43,12 @@ module.exports = function (eleventyConfig) {
       );
   });
   eleventyConfig.addPassthroughCopy({ "src/scripts": "scripts" });
-  // Copy Image Folder to /_site
-  eleventyConfig.addPassthroughCopy("./src/static/img");
-  eleventyConfig.addPassthroughCopy("./src/static/css");
-  // Copy favicon to route of /_site
+  // // Copy Image Folder to /_site
+  // eleventyConfig.addPassthroughCopy("./src/static/img");
+  // eleventyConfig.addPassthroughCopy("./src/static/css");
+  // // Copy favicon to route of /_site
   eleventyConfig.addPassthroughCopy("./src/favicon.ico");
+  eleventyConfig.addPassthroughCopy({ "src/static": "static" });
 
   // Minify HTML
 

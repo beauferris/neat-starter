@@ -6,21 +6,35 @@ pagination:
   alias: tire
 permalink: "tires/{{ tire.data.sku | slug }}/"
 ---
-<article>
-  <h1>{{ tire.data.brand }}
-    {{ tire.data.model }}</h1>
-  <p class="meta">{{ tire.data.size }} • {{ tire.data.category }} • ${{ tire.data.price }}</p>
+<section class="govuk-!-margin-top-0 govuk-!-padding-top-5 govuk-!-padding-bottom-7">
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
 
-  {% if tire.data.images %}
-    <img src="{{ tire.data.images[0].src }}" alt="{{ tire.data.title }}"/>
-  {% endif %}
+      <div class="govuk-grid-column-one-half">
+        <h2 class="govuk-heading-l" >{{ tire.data.title }}</h2>
+        <h3>{{ tire.data.size }}</h3>
+      </div>
+      <div class="govuk-grid-column-one-half">
+        <img style="height:100%;width:100%;" src="{{ tire.data.images[0]}}" alt="{{ tire.data.title }}"/>
+      </div>
+      {# <article>
+        <h1>{{ tire.data.brand }}
+          {{ tire.data.model }}</h1>
+        <p class="meta">{{ tire.data.size }} • {{ tire.data.category }} • ${{ tire.data.price }}</p>
 
-  <ul>
-    <li>SKU: {{ tire.data.sku }}</li>
-    <li>Load Index: {{ tire.data.loadIndex or "-" }}</li>
-    <li>Speed Rating: {{ tire.data.speedRating or "-" }}</li>
+        {% if tire.data.images %}
+          <img src="{{ tire.data.images[0].src }}" alt="{{ tire.data.title }}"/>
+        {% endif %}
 
-  </ul>
+        <ul>
+          <li>SKU: {{ tire.data.sku }}</li>
+          <li>Load Index: {{ tire.data.loadIndex or "-" }}</li>
+          <li>Speed Rating: {{ tire.data.speedRating or "-" }}</li>
 
-  {{ tire.templateContent | safe }}
-</article>
+        </ul>
+
+        {{ tire.templateContent | safe }}
+      </article> #}
+    </div>
+  </div>
+</section>

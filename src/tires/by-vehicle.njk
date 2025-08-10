@@ -1,0 +1,147 @@
+---
+layout: "layout.njk"
+title: "Find Tires by Vehicle"
+permalink: "/tires/by-vehicle/"
+---
+<div class="govuk-width-container">
+  <h1>Find Tires by Vehicle</h1>
+
+  <form id="veh-form">
+    <div class="govuk-grid-row">
+
+      <div class="govuk-grid-column-one-quarter">
+        <div class="govuk-form-group">
+
+          <select class="govuk-select" id="make">
+            <option>Acura</option>
+            <option>Honda</option>
+            <option>Toyota</option>
+          </select>
+
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-quarter">
+        <div class="govuk-form-group">
+
+          <select class="govuk-select" id="model">
+            <option>ADX</option>
+            <option>Civic</option>
+            <option>Camry</option>
+          </select>
+
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-quarter">
+        <div class="govuk-form-group">
+
+          <select class="govuk-select" id="year">
+            <option>2025</option>
+            <option selected>2024</option>
+            <option>2022</option>
+          </select>
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-quarter">
+        <div class="govuk-form-group">
+
+          <select class="govuk-select" id="mod" disabled>
+            <option value="">Select a modification…</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <button class="govuk-button" type="submit">Find Tires</button>
+  </div>
+</form>
+</div>
+<pre id="out" style="margin-top:1rem;background:#f6f6f6;padding:1rem"></pre>
+
+<script type="module">
+// Small helpers
+const $ = s => document.querySelector(s);
+const make = $("#make"),
+  model = $("#model"),
+  year = $("#year"),
+  mod = $("#mod"),
+  out = $("#out");
+
+async function fetchJSON(url, body) {
+  const r = await fetch(url, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
+  const j = await r
+    .json()
+    .catch(() => ({}));
+  if (!r.ok) 
+    throw new Error(j.error || r.statusText);
+  return j;
+}
+
+// Cache mods per (make|model|year) while browsing
+const cache = new Map();
+async function loadMods() {
+  const key = `${make.value}|${model.value}|${year.value}`;
+  mod.disabled = true;
+  mod.innerHTML = `<option>Loading…</option>`;
+
+  try {
+    const data = cache.get(key) || await fetchJSON("/.netlify/functions/vehicle-options", {
+      make: make.value,
+      model: model.value,
+      year: year.value
+    });
+    cache.set(key, data);
+
+    if (
+      !data.modifications
+      ?.length) {
+      mod.innerHTML = `<option value="">No modifications found</option>`;
+      return;
+    }
+    mod.innerHTML = `<option value="">Select a modification…</option>` + data
+      .modifications
+      .map(m => `<option value="${m.id}">${m.label}</option>`)
+      .join("");
+    mod.disabled = false;
+  } catch (e) {
+    mod.innerHTML = `<option value="">Error loading modifications</option>`;
+    out.textContent = e.message;
+  }
+}
+
+make.addEventListener("change", loadMods);
+model.addEventListener("change", loadMods);
+year.addEventListener("change", loadMods);
+
+// initial mods load
+loadMods();
+
+// Submit → get sizes using your vehicle-lookup function (expects modification)
+document
+  .getElementById("veh-form")
+  .addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!mod.value) {
+      out.textContent = "Pick a modification first.";
+      return;
+    }
+    out.textContent = "Loading sizes…";
+
+    try {
+      const data = await fetchJSON("/.netlify/functions/vehicle-lookup", {
+        make: make.value,
+        model: model.value,
+        year: year.value,
+        modification: mod.value
+      });
+      out.textContent = JSON.stringify(data, null, 2); // contains sizes and/or raw
+    } catch (e) {
+      out.textContent = e.message;
+    }
+  });
+</script>
+</div>
