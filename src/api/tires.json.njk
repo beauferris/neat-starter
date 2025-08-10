@@ -1,0 +1,19 @@
+---
+permalink: "/api/tires.json"
+eleventyExcludeFromCollections: true
+---
+[
+{% for tire in collections.tires %}
+  {
+    "sku": "{{ tire.data.sku }}",
+    "title": "{{ tire.data.title }}",
+    "brand": "{{ tire.data.brand }}",
+    "model": "{{ tire.data.model }}",
+    "price": {{ tire.data.price }},
+    "images": {{ tire.data.images | dump | safe }},
+    "size": "{{ tire.data.size }}",
+    "inStock": {{ tire.data.inStock | dump }},
+    "url": "{{ tire.url }}"
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+]
