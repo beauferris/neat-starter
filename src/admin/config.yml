@@ -32,7 +32,7 @@ collections:
         }
       - { name: "size", label: "Display Size", hint: "e.g. 225/45R17" }
       - { name: "quantity", label: "Quantity", widget: "number" }
-      - { name: "tread, label: "Tread", widget: "string" }
+      - { name: "tread", label: "Tread", widget: "string" }
       - { name: "rim", label: "Rim (inches)", widget: "number" }
       - {
           name: "loadIndex",
