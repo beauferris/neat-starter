@@ -10,6 +10,7 @@ tread: 70%
 rim: 1
 price: 380
 inStock: true
+permalink: false
 images:
   - /static/img/530366256_1546216429679230_3621015224324892949_n.jpg
 ---
