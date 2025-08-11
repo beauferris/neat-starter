@@ -7,27 +7,27 @@ html, body {
 
 :root {
   --bd-highlight: #f5ed30;
-
+  --main-color: rgb(10, 7, 43);
   --hightlight: var(--db-red);
   --db-red: #a03836;
   /* --db-red: #007A3D; */
   --main-header-color: #222;
   --main-landing-color: #003a69;
-  --card-focus-background: var(--db-red);
-  --card-link-color: var(--db-red);
-  --card-focus: var(--db-red);
+  --card-focus-background: var(--main-color);
+  --card-link-color: var(--main-color);
+  --card-focus: var(--main-color);
 
-  --link-color: var(--db-red);
-  --link-color-visisted: var(--db-red);
+  --link-color: var(--main-color);
+  --link-color-visisted: var(--main-color);
 
   --link-color-hover: #003078;
   --link-color-active: #0b0c0c;
   --link-color-focus: #0b0c0c;
   --link-bg-color: var(--hightlight);
 
-  --button-bg: var(--db-red);
-  --button-shadow: var(--db-red);
-  --button-bg-hover: var(--db-red);
+  --button-bg: var(--main-color);
+  --button-shadow: var(--main-color);
+  --button-bg-hover: var(--main-color);
   --button-border-focus: var(--hightlight);
 
 
@@ -4976,7 +4976,7 @@ html, body {
   max-width: 100%;
   height: 2.5rem;
   padding: 5px;
-  border: 2px solid #0b0c0c;
+  border: 1px solid #0b0c0c;
   color: #0b0c0c;
   background-color: #ffffff;
 }
@@ -5002,9 +5002,9 @@ html, body {
 }
 
 .govuk-select:focus {
-  outline: 3px solid var(--hightlight);
+  outline: 1px solid var(--hightlight);
   outline-offset: 0;
-  box-shadow: inset 0 0 0 2px;
+  box-shadow: none;
 }
 
 .govuk-select:disabled {
@@ -6788,7 +6788,7 @@ html, body {
 .govuk-header {
   margin-bottom: 0;
   border-bottom: 0;
-  background-color: #222;
+  /* background-color: #222; */
 
 }
 
@@ -7249,6 +7249,15 @@ input, textarea, select, button {
   content: "";
   display: none;
   clear: both;
+}
+
+.govuk-select {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+#tire-results {
+  color: white;
 }
 
 /*# sourceMappingURL=styles.css.map */
