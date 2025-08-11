@@ -11,12 +11,16 @@ permalink: "tires/{{ tire.data.sku | slug }}/"
     <div class="govuk-grid-row">
 
       <div class="govuk-grid-column-one-half">
-        <h2 class="govuk-heading-l" >{{ tire.data.title }}</h2>
-        <h3>{{ tire.data.size }}</h3>
+        <h1 class="govuk-heading-xl" >{{ tire.data.title }}</h2>
+        <h2 class="govuk-heading-l">${{ tire.data.price }}</h2>
+        <h3>Size: {{ tire.data.size }}</h3>
+        <h3>Tread: {{tire.data.tread}}</h3>
+        <h3>Quantity: {{tire.data.quantity}}</h3>
       </div>
       <div class="govuk-grid-column-one-half">
         <img style="height:100%;width:100%;" src="{{ tire.data.images[0]}}" alt="{{ tire.data.title }}"/>
       </div>
+      {% include "partials/contact.njk" %}
       {# <article>
         <h1>{{ tire.data.brand }}
           {{ tire.data.model }}</h1>
