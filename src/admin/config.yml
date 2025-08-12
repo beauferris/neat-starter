@@ -13,15 +13,14 @@ public_folder: "/static/img"
 # publish_mode: editorial_workflow
 collections:
   - label: "Tires"
-    name: "tires
+    name: "tires"
     folder: "src/tires"
-    identifier_field: "sku"
     create: true
     slug: "{{fields.sku}}" # keeps URLs stable even if title changes
     format: "frontmatter" # markdown with front matter; could be "json" if you prefer
     fields:
       - { name: "title", label: "Title" } # e.g., "Michelin Pilot Sport All Season 4"
-      - { name: "sku", label: "SKU", widget: "hidden", default: "" }
+      - { name: "sku", label: "SKU" }
       - { name: "brand", label: "Brand" }
       - {
           name: "category",
