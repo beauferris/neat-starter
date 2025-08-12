@@ -13,7 +13,7 @@ public_folder: "/static/img"
 # publish_mode: editorial_workflow
 collections:
   - label: "Tires"
-    name: "tires"
+    name: "tires
     folder: "src/tires"
     identifier_field: "sku"
     create: true
