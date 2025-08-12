@@ -36,25 +36,12 @@ module.exports = function (eleventyConfig) {
       "./static/css/prism-tomorrow.css",
   });
   eleventyConfig.addCollection("tires", (collectionApi) => {
-    return collectionApi
-      .getFilteredByGlob("src/tires/*.md")
-      .sort((a, b) =>
-        (a.data.brand + a.data.model).localeCompare(b.data.brand + b.data.model)
-      );
+    return collectionApi.getFilteredByGlob("src/tires/*.md");
   });
   eleventyConfig.addPassthroughCopy({ "src/scripts": "scripts" });
-  // // Copy Image Folder to /_site
-  // eleventyConfig.addPassthroughCopy("./src/static/img");
-  // eleventyConfig.addPassthroughCopy("./src/static/css");
-  // // Copy favicon to route of /_site
   eleventyConfig.addPassthroughCopy("./src/favicon.ico");
   eleventyConfig.addPassthroughCopy({ "src/static": "static" });
-  // eleventyConfig.addPassthroughCopy({
-  //   "./src/admin/init.js": "./admin/init.js",
-  // });
 
-  // Let Eleventy transform HTML files as nunjucks
-  // So that we can use .html instead of .njk
   return {
     dir: {
       input: "src",
