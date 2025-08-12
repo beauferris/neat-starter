@@ -13,7 +13,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.setUseGitIgnore(false);
 
   // Merge data instead of overriding
-  eleventyConfig.setDataDeepMerge(true);
+  // eleventyConfig.setDataDeepMerge(true);
 
   // human readable date
   eleventyConfig.addFilter("readableDate", (dateObj) => {
