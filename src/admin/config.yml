@@ -21,7 +21,7 @@ collections:
     format: "frontmatter" # markdown with front matter; could be "json" if you prefer
     fields:
       - { name: "title", label: "Title" } # e.g., "Michelin Pilot Sport All Season 4"
-      - { name: "sku", label: "SKU", required: false }
+      - { name: "sku", label: "SKU" }
       - { name: "brand", label: "Brand" }
       - {
           name: "category",
@@ -53,7 +53,6 @@ collections:
           widget: "markdown",
           required: false,
         }
-
   - label: "Blog"
     name: "blog"
     folder: "src/posts"
