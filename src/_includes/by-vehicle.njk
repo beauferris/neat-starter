@@ -3,8 +3,13 @@ layout: "layout.njk"
 title: "Find Tires by Vehicle"
 permalink: "/tires/by-vehicle/"
 --- #}
-<div class="govuk-width-container">
-  <h1 style="margin-top:40px;color:white" class="govuk-heading-xl">Find used tires in Calgary </h2>
+<div style="background-image: url('static/img/tires.png'); height:300px;      background-size: cover;  margin-bottom:50px;height: 250px;
+    background-position-y: center;"></div>
+<div class="govuk-width-container" >
+  {# <h1 class="govuk-heading-xl" style="color:white;margin-top:50px;" >Find used tires in Calgary</h1> #}
+
+  {# <h1 style="margin-top:40px;color:white" class="govuk-heading-xl">Find used tires in Calgary </h2> #}
+
   {# <h2>Find Tires by Vehicle</h2> #}
 
   <form id="veh-form">
@@ -74,7 +79,7 @@ permalink: "/tires/by-vehicle/"
         </div>
       </div>
     </div>
-    <button class="govuk-button" type="submit">Find Tires</button>
+    <button disabled class="govuk-button" id="submit" type="submit">Find Tires</button>
   </form>
   {# <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third govuk-!-padding-bottom-6">
@@ -97,7 +102,7 @@ permalink: "/tires/by-vehicle/"
   const make = $("#make"), model = $("#model"), year = $("#year"), mod = $("#mod");
   const resultsEl = $("#tire-results");
   const debugEl = $("#out");
-
+  const submit = $("#submit");
 async function fetchJSON(url, body) {
   const r = await fetch(url, {
     method: "POST",
@@ -110,6 +115,116 @@ async function fetchJSON(url, body) {
 }
  const r = await fetch("/api/tires.json");
     const results = await r.json();
+
+// === Pagination + Sorting state ===
+const pagerEl = document.getElementById("pager");
+
+let state = {
+  results: [],      // full current dataset
+  page: 1,          // current page (1-based)
+  perPage: 6,      // items per page
+  sort: ""          // "", "asc", "desc"
+};
+
+function renderPager(total, page, perPage) {
+  pagerEl.innerHTML = "";
+  if (total <= perPage) return; // no controls needed
+
+  const totalPages = Math.ceil(total / perPage);
+
+  const btn = (label, targetPage, disabled=false, isCurrent=false) => {
+    const a = document.createElement("button");
+    a.type = "button";
+    a.className = "govuk-button govuk-button--secondary";
+    a.textContent = label;
+    if (disabled) {
+      a.disabled = true;
+    } else {
+      a.addEventListener("click", () => {
+        state.page = targetPage;
+        renderList();
+      });
+    }
+    if (isCurrent) {
+      a.classList.add("is-current");
+      a.setAttribute("aria-current", "page");
+    }
+    return a;
+  };
+
+  // Prev
+  pagerEl.appendChild(btn("‹ Prev", Math.max(1, page - 1), page === 1));
+
+  // Page numbers (windowed)
+  const windowSize = 5;
+  let start = Math.max(1, page - Math.floor(windowSize/2));
+  let end = Math.min(totalPages, start + windowSize - 1);
+  if (end - start + 1 < windowSize) start = Math.max(1, end - windowSize + 1);
+
+  for (let p = start; p <= end; p++) {
+    pagerEl.appendChild(btn(String(p), p, false, p === page));
+  }
+
+  // Next
+  pagerEl.appendChild(btn("Next ›", Math.min(totalPages, page + 1), page === totalPages));
+ 
+}
+
+// Build/replace sort dropdown hooked into state.sort
+function buildSortControl(results) {
+  resultsEl.querySelector("#sortPrice")?.closest(".sort-wrap")?.remove();
+
+  const sortWrap = document.createElement("div");
+  sortWrap.className = "sort-wrap govuk-!-margin-bottom-3";
+  sortWrap.innerHTML = `
+    <label class="govuk-label" for="sortPrice">Sort by</label>
+    <select id="sortPrice" class="govuk-select">
+      <option value="" ${state.sort===""?"selected":""}>Default</option>
+      <option value="asc" ${state.sort==="asc"?"selected":""}>Price: Low to High</option>
+      <option value="desc" ${state.sort==="desc"?"selected":""}>Price: High to Low</option>
+    </select>
+  `;
+
+  const sortSel = resultsEl.querySelector("#sortPrice");
+  sortSel.addEventListener("change", () => {
+    state.sort = sortSel.value;
+    state.page = 1;
+    renderList();
+  });
+  return sortWrap;
+}
+
+
+// Setter: whenever you have a new result set (all tires OR filtered)
+function setResults(list) {
+  state.results = Array.isArray(list) ? list : [];
+  state.page = 1;
+  renderList();
+}
+
+function applySort(items, sort) {
+  const out = [...items];
+  if (sort === "asc") {
+    out.sort((a,b) => (a.price ?? Infinity) - (b.price ?? Infinity));
+  } else if (sort === "desc") {
+    out.sort((a,b) => (b.price ?? -Infinity) - (a.price ?? -Infinity));
+  }
+  return out;
+}
+
+function renderList() {
+  // Clear current cards safely but keep chips/sorter if present
+  resultsEl.querySelector(".results-wrap")?.remove();
+
+  // Sort full dataset, slice current page, render cards
+  const sorted = applySort(state.results, state.sort);
+  const total = sorted.length;
+  const start = (state.page - 1) * state.perPage;
+  const pageItems = sorted.slice(start, start + state.perPage);
+
+  renderCards(pageItems);
+  renderPager(total, state.page, state.perPage);
+}
 
 function renderCards(items){
 resultsEl.firstElementChild?.remove();
@@ -160,26 +275,22 @@ resultsEl.firstElementChild?.remove();
   });
   }
 
-async function loadAllTires() {
+async function loadAllTiresFromJSON() {
   try {
-    resultsEl.innerHTML = `<p style="color:black" class="govuk-body">Loading all tires…</p>`;
-    const r = await fetch("/api/tires.json");
-    const results = await r.json();
+    resultsEl.innerHTML = `<p class="govuk-body">Loading all tires…</p>`;
+    const res = await fetch("/api/tires.json", { headers: { accept: "application/json" }});
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const all = await res.json();
 
     resultsEl.innerHTML = "";
-
-    if (!results.length) {
-      resultsEl.innerHTML = `<p style="color:black" class="govuk-body">No tires found.</p>`;
-      return;
-    }
-
-    
-    renderCards(results);
+   
+    setResults(all);                              // paginate + render
   } catch (err) {
-    resultsEl.innerHTML = `<p class="govuk-error-message">Error: ${err.message}</p>`;
+    resultsEl.innerHTML = `<p class="govuk-error-message">Failed to load tires: ${err.message}</p>`;
   }
 }
-loadAllTires();
+// call once at the end of your script
+loadAllTiresFromJSON();
 
 async function loadYears() {
   mod.disabled = true;
@@ -248,6 +359,7 @@ async function loadMods() {
     mod.innerHTML = `<option value="">Trim</option>` +
       data.modifications.map(m => `<option value="${m.id}">${m.label}</option>`).join("");
     mod.disabled = false;
+    submit.disabled =false;
   } catch (e) {
     mod.innerHTML = `<option value="">Error loading modifications</option>`;
     resultsEl.textContent = e.message;
@@ -256,21 +368,20 @@ async function loadMods() {
 make.addEventListener("change", loadYears);
 year.addEventListener("change", loadModels);
 model.addEventListener("change", loadMods);
-  sortPrice.addEventListener("change", () => {
-    
 
-    let sorted = [...results];
-    if (sortPrice.value === "asc") {
-      sorted.sort((a, b) => (a.price ?? Infinity) - (b.price ?? Infinity));
-    } else if (sortPrice.value === "desc") {
-      sorted.sort((a, b) => (b.price ?? -Infinity) - (a.price ?? -Infinity));
-    }
-    renderCards(sorted);
-  });
+sortPrice.addEventListener("change", () => {
+  state.sort = sortPrice.value;
+    state.page = 1;
+    renderList();
+  console.log(state.sort);
+ 
+});
+
 //fetch data
 document.getElementById("veh-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   resultsEl.textContent = "Loading…";
+
   if (!mod.value) { resultsEl.textContent = "Pick a modification first."; return; }
 
   try {
@@ -295,10 +406,6 @@ document.getElementById("veh-form").addEventListener("submit", async (e) => {
       return;
   }
     
-
-  
-
-
 // Load all tires when page first loads
 
 // Replace results
