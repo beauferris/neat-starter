@@ -10,10 +10,12 @@ title: "Tires"
       <a href="{{ t.data.sku | slugify }}">
         <img src="{{ t.data.images[0] }}" alt="{{ t.data.title }}">
       </a>
+
       <h3>
         <a href="{{ t.data.sku | slugify }}">{{ t.data.brand }}
           {{ t.data.model }}</a>
       </h3>
+
       <p>{{ t.data.size }} — ${{ t.data.price }}</p>
       {% if t.data.inStock %}
         <span class="badge">In stock</span>
