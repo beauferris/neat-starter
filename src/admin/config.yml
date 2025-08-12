@@ -15,6 +15,7 @@ collections:
   - label: "Tires"
     name: "tires"
     folder: "src/tires"
+    identifier_field: "sku"
     create: true
     slug: "{{fields.sku}}" # keeps URLs stable even if title changes
     format: "frontmatter" # markdown with front matter; could be "json" if you prefer
