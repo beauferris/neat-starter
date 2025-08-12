@@ -22,7 +22,6 @@ collections:
       - { name: "title", label: "Title" } # e.g., "Michelin Pilot Sport All Season 4"
       - { name: "sku", label: "SKU" }
       - { name: "brand", label: "Brand" }
-      - { name: "model", label: "Model" }
       - {
           name: "category",
           label: "Category",
@@ -33,8 +32,6 @@ collections:
       - { name: "size", label: "Display Size", hint: "e.g. 225/45R17" }
       - { name: "quantity", label: "Quantity", widget: "number" }
       - { name: "tread", label: "Tread", widget: "string" }
-      - { name: "rim", label: "Rim (inches)", widget: "number" }
-      - { name: "speedRating", label: "Speed Rating", required: false }
       - {
           name: "price",
           label: "Price",
