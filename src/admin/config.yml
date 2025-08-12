@@ -20,7 +20,7 @@ collections:
     format: "frontmatter" # markdown with front matter; could be "json" if you prefer
     fields:
       - { name: "title", label: "Title" } # e.g., "Michelin Pilot Sport All Season 4"
-      - { name: "sku", label: "SKU", widget: "hidden", default: "{{uuid}}" }
+      - { name: "sku", label: "SKU", widget: "uuid" }
       - { name: "brand", label: "Brand" }
       - {
           name: "category",
