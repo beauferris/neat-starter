@@ -1,5 +1,5 @@
 ---
-title: Yokohama Avid S33
+title: Yokohama Avid
 sku: "{{uuid}}"
 brand: Yokohama
 category: All-Season
