@@ -3,7 +3,7 @@ title: Pirelli P-Zero All Season
 sku: Pirelli-P-Zero-All-season
 brand: Pirelli
 category: All-Season
-size: 245/50r20
+size: 235/55r19
 quantity: 4
 tread: 90%
 price: 380

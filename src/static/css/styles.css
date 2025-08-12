@@ -7,8 +7,8 @@ html, body {
 
 :root {
   --bd-highlight: #f5ed30;
-  --main-color: rgb(10, 7, 43);
-  --hightlight: var(--db-red);
+  --main-color: hsla(240, 71%, 13%, 1);
+  --hightlight: var(--main-color);
   --db-red: #a03836;
   /* --db-red: #007A3D; */
   --main-header-color: #222;
@@ -7258,6 +7258,11 @@ input, textarea, select, button {
 
 #tire-results {
   color: white;
+}
+
+.govuk-tag {
+  margin-right: 5px;
+  margin-top: 10px;
 }
 
 /*# sourceMappingURL=styles.css.map */

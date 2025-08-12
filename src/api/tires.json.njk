@@ -5,7 +5,7 @@ eleventyExcludeFromCollections: true
 [
 {% for tire in collections.tires %}
   {
-    "sku": "{{ tire.data.sku }}",
+    "sku": "{{ tire.data.sku | slug}}",
     "title": "{{ tire.data.title }}",
     "brand": "{{ tire.data.brand }}",
     "model": "{{ tire.data.model }}",

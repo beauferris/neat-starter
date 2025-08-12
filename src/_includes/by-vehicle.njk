@@ -3,94 +3,100 @@ layout: "layout.njk"
 title: "Find Tires by Vehicle"
 permalink: "/tires/by-vehicle/"
 --- #}
-<section style="background-color: rgb(11,11,11)" class="{{color}} govuk-!-margin-top-0 govuk-!-padding-top-5 govuk-!-padding-bottom-7">
+<div class="govuk-width-container">
+  <h1 style="margin-top:40px;color:white" class="govuk-heading-xl">Find used tires in Calgary </h2>
+  {# <h2>Find Tires by Vehicle</h2> #}
 
-  <div class="govuk-width-container">
-    <h1 style="color:white;">Find Tires by Vehicle</h1>
-
-    <form id="veh-form">
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-column-one-quarter">
-          <div class="govuk-form-group">
-            <select class="govuk-select" id="make">
-              <option value="">Make</option>
-              <option value="acura">Acura</option>
-              <option value="alfa romeo">Alfa Romeo</option>
-              <option value="aston martin">Aston Martin</option>
-              <option value="audi">Audi</option>
-              <option value="bmw">BMW</option>
-              <option value="buick">Buick</option>
-              <option value="cadillac">Cadillac</option>
-              <option value="chevrolet">Chevrolet</option>
-              <option value="ferrari">Ferrari</option>
-              <option value="ford">Ford</option>
-              <option value="genesis">Genesis</option>
-              <option value="gmc">GMC</option>
-              <option value="honda">Honda</option>
-              <option value="hyundai">Hyundai</option>
-              <option value="ineos">INEOS</option>
-              <option value="jaguar">Jaguar</option>
-              <option value="kia">Kia</option>
-              <option value="lamborghini">Lamborghini</option>
-              <option value="lexus">Lexus</option>
-              <option value="lincoln">Lincoln</option>
-              <option value="lotus">Lotus</option>
-              <option value="lucid">Lucid</option>
-              <option value="maserati">Maserati</option>
-              <option value="mazda">Mazda</option>
-              <option value="nissan">Nissan</option>
-              <option value="polestar">Polestar</option>
-              <option value="porsche">Porsche</option>
-              <option value="rivian">Rivian</option>
-              <option value="rolls-royce">Rolls-Royce</option>
-              <option value="subaru">Subaru</option>
-              <option value="toyota">Toyota</option>
-              <option value="tesla">Tesla</option>
-              <option value="volvo">Volvo</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="govuk-grid-column-one-quarter">
-          <div class="govuk-form-group">
-            <select disabled class="govuk-select" id="year">
-              <option value=""> Year </option>
-            </select>
-          </div>
-        </div>
-
-        <div class="govuk-grid-column-one-quarter">
-          <div class="govuk-form-group">
-            <select disabled class="govuk-select" id="model">
-              <option value="">Model</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="govuk-grid-column-one-quarter">
-          <div class="govuk-form-group">
-            <select class="govuk-select" id="mod" disabled>
-              <option value="">Trim</option>
-            </select>
-          </div>
+  <form id="veh-form">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-quarter">
+        <div class="govuk-form-group">
+          <select class="govuk-select" id="make">
+            <option value="">Make</option>
+            <option value="acura">Acura</option>
+            <option value="alfa romeo">Alfa Romeo</option>
+            <option value="aston martin">Aston Martin</option>
+            <option value="audi">Audi</option>
+            <option value="bmw">BMW</option>
+            <option value="buick">Buick</option>
+            <option value="cadillac">Cadillac</option>
+            <option value="chevrolet">Chevrolet</option>
+            <option value="ferrari">Ferrari</option>
+            <option value="ford">Ford</option>
+            <option value="genesis">Genesis</option>
+            <option value="gmc">GMC</option>
+            <option value="honda">Honda</option>
+            <option value="hyundai">Hyundai</option>
+            <option value="ineos">INEOS</option>
+            <option value="jaguar">Jaguar</option>
+            <option value="kia">Kia</option>
+            <option value="lamborghini">Lamborghini</option>
+            <option value="lexus">Lexus</option>
+            <option value="lincoln">Lincoln</option>
+            <option value="lotus">Lotus</option>
+            <option value="lucid">Lucid</option>
+            <option value="maserati">Maserati</option>
+            <option value="mazda">Mazda</option>
+            <option value="nissan">Nissan</option>
+            <option value="polestar">Polestar</option>
+            <option value="porsche">Porsche</option>
+            <option value="rivian">Rivian</option>
+            <option value="rolls-royce">Rolls-Royce</option>
+            <option value="subaru">Subaru</option>
+            <option value="toyota">Toyota</option>
+            <option value="tesla">Tesla</option>
+            <option value="volvo">Volvo</option>
+          </select>
         </div>
       </div>
-      <button class="govuk-button" type="submit">Find Tires</button>
-    </form>
 
-    <!-- simple results area -->
-    <div id="tire-results" class="govuk-!-margin-top-3"></div>
+      <div class="govuk-grid-column-one-quarter">
+        <div class="govuk-form-group">
+          <select disabled class="govuk-select" id="year">
+            <option value=""> Year </option>
+          </select>
+        </div>
+      </div>
 
-    <!-- optional debug output -->
-    <pre id="out" style="margin-top:1rem;background:#f6f6f6;padding:1rem; display:none;"></pre>
-  </div>
-</section>
+      <div class="govuk-grid-column-one-quarter">
+        <div class="govuk-form-group">
+          <select disabled class="govuk-select" id="model">
+            <option value="">Model</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="govuk-grid-column-one-quarter">
+        <div class="govuk-form-group">
+          <select class="govuk-select" id="mod" disabled>
+            <option value="">Trim</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <button class="govuk-button" type="submit">Find Tires</button>
+  </form>
+  {# <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third govuk-!-padding-bottom-6">
+      <select id="sortPrice" class="govuk-select">
+        <option value="">Default</option>
+        <option value="asc">Price: Low to High</option>
+        <option value="desc">Price: High to Low</option>
+      </select>
+    </div>
+  </div> #}
+  <!-- simple results area -->
+  {# <div id="tire-results" class="govuk-!-margin-top-3"></div> #}
+
+  <!-- optional debug output -->
+  <pre id="out" style="margin-top:1rem;background:#f6f6f6;padding:1rem; display:none;"></pre>
+</div>
+
 <script type="module">
-  // --- helpers / elements ---
-const $ = s => document.querySelector(s);
-const make = $("#make"), model = $("#model"), year = $("#year"), mod = $("#mod");
-const resultsEl = $("#tire-results");
-const debugEl = $("#out");
+  const $ = s => document.querySelector(s);
+  const make = $("#make"), model = $("#model"), year = $("#year"), mod = $("#mod");
+  const resultsEl = $("#tire-results");
+  const debugEl = $("#out");
 
 async function fetchJSON(url, body) {
   const r = await fetch(url, {
@@ -102,6 +108,78 @@ async function fetchJSON(url, body) {
   if (!r.ok) throw new Error(j.error || r.statusText);
   return j;
 }
+ const r = await fetch("/api/tires.json");
+    const results = await r.json();
+
+function renderCards(items){
+resultsEl.firstElementChild?.remove();
+    const container = document.createElement("div");
+    
+    container.classList.add("dfe-grid-container");
+    
+    items.forEach(t => {
+    const card = document.createElement("div");
+    card.classList.add("dfe-card");
+
+    // Image
+    const img = document.createElement("img");
+    img.src = t.images?.[0] || "/static/img/no-image.png";
+    img.alt = t.title || t.sku || "Tire image";
+    card.appendChild(img);
+
+    // Card inner container
+    const inner = document.createElement("div");
+    inner.classList.add("dfe-card-container");
+
+    // Title
+    const h3 = document.createElement("h3");
+    h3.classList.add("govuk-heading-m");
+  
+
+    const a = document.createElement("a");
+    a.classList.add("govuk-link", "govuk-link--no-visited-state", "dfe-card-link--header");
+    a.href = `/tires/${t.sku || ""}`;
+    a.textContent = t.title || "Unnamed tire";
+    h3.appendChild(a);
+    inner.appendChild(h3);
+
+    const price = document.createElement("p");
+    price.classList.add("govuk-body");
+    price.textContent = "$"+t.price;
+   
+    inner.appendChild(price);
+    // Size
+    const p = document.createElement("p");
+    p.classList.add("govuk-body");
+    p.textContent = t.size || "";
+    inner.appendChild(p);
+    card.appendChild(inner);
+
+    container.appendChild(card);
+    resultsEl.appendChild(container);
+  });
+  }
+
+async function loadAllTires() {
+  try {
+    resultsEl.innerHTML = `<p style="color:black" class="govuk-body">Loading all tires…</p>`;
+    const r = await fetch("/api/tires.json");
+    const results = await r.json();
+
+    resultsEl.innerHTML = "";
+
+    if (!results.length) {
+      resultsEl.innerHTML = `<p style="color:black" class="govuk-body">No tires found.</p>`;
+      return;
+    }
+
+    
+    renderCards(results);
+  } catch (err) {
+    resultsEl.innerHTML = `<p class="govuk-error-message">Error: ${err.message}</p>`;
+  }
+}
+loadAllTires();
 
 async function loadYears() {
   mod.disabled = true;
@@ -129,8 +207,6 @@ async function loadYears() {
     resultsEl.textContent = e.message;
   }
 }
-
-
 async function loadModels() {
   mod.disabled = true;
   mod.innerHTML = '<option>Trim</option>'
@@ -146,7 +222,7 @@ async function loadModels() {
     }
 
     model.innerHTML = `<option value="">Model</option>` +
-      data.models.map(m => `<option value="${m.id}">${m.label}</option>`).join("");
+      data.models.map(m => `<option value="${m.label}">${m.label}</option>`).join("");
     model.disabled = false;
     
   } catch (e) {
@@ -154,10 +230,6 @@ async function loadModels() {
     resultsEl.textContent = e.message;
   }
 }
-
-
-
-// --- load modifications when make/model/year change ---
 const cache = new Map();
 async function loadMods() {
   const key = `${make.value}|${model.value}|${year.value}`;
@@ -181,17 +253,21 @@ async function loadMods() {
     resultsEl.textContent = e.message;
   }
 }
-
 make.addEventListener("change", loadYears);
 year.addEventListener("change", loadModels);
 model.addEventListener("change", loadMods);
+  sortPrice.addEventListener("change", () => {
+    
 
-
-{# if (make.value && model.value && year.value) {
-  loadMods();
-} #}
-
-// --- submit: fetch matches and show just names ---
+    let sorted = [...results];
+    if (sortPrice.value === "asc") {
+      sorted.sort((a, b) => (a.price ?? Infinity) - (b.price ?? Infinity));
+    } else if (sortPrice.value === "desc") {
+      sorted.sort((a, b) => (b.price ?? -Infinity) - (a.price ?? -Infinity));
+    }
+    renderCards(sorted);
+  });
+//fetch data
 document.getElementById("veh-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   resultsEl.textContent = "Loading…";
@@ -201,71 +277,37 @@ document.getElementById("veh-form").addEventListener("submit", async (e) => {
     const data = await fetchJSON("/.netlify/functions/vehicle-lookup", {
       make: make.value, model: model.value, year: year.value, modification: mod.value
     });
-    const sizes = data.sizesNormalized?.length ? data.sizesNormalized : (data.sizes || []);
-const filtersBar = document.createElement('div');
-filtersBar.className = 'govuk-!-margin-top-3 govuk-!-margin-bottom-2';
-filtersBar.innerHTML = sizes?.length
-  ? `<p class="govuk-body govuk-!-margin-bottom-1"><strong>Filtering by size:</strong></p>
-     <div class="filters">
-       ${sizes.map(s => `<span class="filter-chip">${s}</span>`).join('')}
-     </div>`
+
+  const sizes = data.sizesNormalized?.length ? data.sizesNormalized : (data.sizes || []);
+  const filtersBar = document.createElement('div');
+  filtersBar.className = 'govuk-!-margin-top-3 govuk-!-margin-bottom-2';
+  filtersBar.innerHTML = sizes?.length
+  ? `<p class="govuk-body govuk-!-margin-bottom-1"><strong>Compatible Sizes</strong></p>
+    <div class="filters">
+      ${sizes.map(s => `<span class="govuk-tag">${s}</span>`).join('')}
+    </div>`
   : `<p class="govuk-body govuk-!-margin-bottom-1"><strong>Filtering by size:</strong> (none)</p>`;
 
-    // OPTIONAL: show raw for debugging
-    // debugEl.style.display = "block";
-    // debugEl.textContent = JSON.stringify(data, null, 2);
-
-    const results = data.results || [];
+  const results = data.results || [];
     if (!results.length) {
       const sizes = (data.sizesNormalized || data.sizes || []).join(", ");
       resultsEl.innerHTML = `<p>No matching tires found.</p>${sizes ? `<p><small>Sizes: ${sizes}</small></p>` : ""}`;
       return;
-    }
+  }
     
-   // Create card container
-const container = document.createElement("div");
-container.classList.add("dfe-grid-container");
 
-results.forEach(t => {
-  const card = document.createElement("div");
-  card.classList.add("dfe-card");
+  
 
-  // Image
-  const img = document.createElement("img");
-  img.src = t.images?.[0] || "/static/img/no-image.png";
-  img.alt = t.title || t.sku || "Tire image";
-  card.appendChild(img);
 
-  // Card inner container
-  const inner = document.createElement("div");
-  inner.classList.add("dfe-card-container");
-
-  // Title
-  const h3 = document.createElement("h3");
-  h3.classList.add("govuk-heading-m");
-  const a = document.createElement("a");
-  a.classList.add("govuk-link", "govuk-link--no-visited-state", "dfe-card-link--header");
-  a.href = `/tires/${t.sku || ""}`;
-  a.textContent = t.title || "Unnamed tire";
-  h3.appendChild(a);
-  inner.appendChild(h3);
-
-  // Size
-  const p = document.createElement("p");
-  p.classList.add("govuk-body");
-  p.textContent = t.size || "";
-  inner.appendChild(p);
-
-  card.appendChild(inner);
-  container.appendChild(card);
-});
+// Load all tires when page first loads
 
 // Replace results
 resultsEl.innerHTML = "";
 resultsEl.appendChild(filtersBar);
-resultsEl.appendChild(container);
+renderCards(results);
   } catch (err) {
     resultsEl.textContent = `Error: ${err.message}`;
   }
 });
+
 </script>

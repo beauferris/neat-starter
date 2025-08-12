@@ -1,16 +1,6 @@
 ---
 layout: layout.njk
 title: yoyo-tires
-description: 
-button_title: Call (403) 606-5084
-button_link: "tel:4036065084"
-image_url : 
-hero:
-  imageUrl: "/assets/images/truck.jpeg"
-  title: "Derek Brown’s Academy of Driving"
-  description: "As a leading provider of driving education in Calgary for over 50 years, we are thrilled to expand our services to Lethbridge, AB."
-  ctaText: "Explore who we are"
-  ctaUrl: "/company/"
 split:
   title: "We buy used tires"
   description: "Looking to get rid of your old tires?"
@@ -19,10 +9,34 @@ split:
   image: "db.png"
 ---
 
-{% include "by-vehicle.njk" %}
-{% set collectionHeader = "New Arrivals" %}
-{% set collectionName = "tires" %}
-{% include "components/cards.njk" %}
+<section style="background:black" class="{{color}} govuk-!-margin-top-0 govuk-!-padding-top-5 govuk-!-padding-bottom-0">
+  {% include "by-vehicle.njk" %}
+
+</section>
+<section class="{{color}} govuk-!-margin-top-0 govuk-!-padding-top-5 govuk-!-padding-bottom-0">
+
+  <div class="govuk-width-container">
+
+    <div class="govuk-grid-row govuk-!-padding-bottom-3"">
+      <div class="govuk-grid-column-one-third">
+        <label class="govuk-label">Sort by</label>
+        <select id="sortPrice" class="govuk-select">
+          <option value="">Default</option>
+          <option value="asc">Price: Low to High</option>
+          <option value="desc">Price: High to Low</option>
+        </select>
+
+      </div>
+    </div>
+  </div>
+  <div class="govuk-width-container">
+    <div id="tire-results" class="govuk-!-margin-top-0"></div>
+  </div>
+</section>
+{# {% set collectionHeader = "New Arrivals" %} #}
+{# {% set collectionName = "tires" %} #}
+
+{# {% include "components/cards.njk" %} #}
 
 {# {% set bgColor = "section-grey" %}
 {% set collectionHeader = "Truck Courses" %}
