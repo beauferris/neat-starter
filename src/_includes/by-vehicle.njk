@@ -430,9 +430,10 @@ document.getElementById("veh-form").addEventListener("submit", async (e) => {
   state.resultsCount = results.length;
   state.sizes = sizes;
   console.log(state.sizes);
+  renderList();
     if (!results.length) {
       const sizes = (data.sizesNormalized || data.sizes || []).join(", ");
-      resultsEl.innerHTML = `<p>No matching tires found.</p>${sizes ? `<p><small>Sizes: ${sizes}</small></p>` : ""}`;
+      resultsEl.innerHTML = `<h2 style="color:black">No matching tires found.</h2>${sizes ? `<p><small>Sizes: ${sizes}</small></p>` : ""}`;
       return;
   }
     
