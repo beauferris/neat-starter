@@ -9,15 +9,24 @@ split:
   image: "db.png"
 ---
 
-<section style="background:black" class="{{color}} govuk-!-margin-top-0 govuk-!-padding-top-5 govuk-!-padding-bottom-0">
-  {% include "by-vehicle.njk" %}
+<section  class="tire-landing govuk-!-margin-top-0 govuk-!-padding-top-7 govuk-!-padding-bottom-0">
 
-</section>
-<section class="{{color}} govuk-!-margin-top-0 govuk-!-padding-top-5 govuk-!-padding-bottom-0">
+  <img class="tire-sticker-2" src="/static/img/tire2.png" ></img>
+  <img class="tire-sticker-3" src="/static/img/tire2.png" ></img>
 
   <div class="govuk-width-container">
+    <h1 class="govuk-heading-xxl" style="max-width:35rem;color:white;margin-top:50px;" >Find used tires in Calgary</h1>
+    <p class="govuk-body-lead" style="color:white;margin:0">Free delivery anywhere in Calgary</p>
+  </div>
+</section>
 
-    <div class="govuk-grid-row govuk-!-padding-bottom-3"">
+<section class="tire-filter-wrapper {{color}} tire govuk-!-margin-top-0 govuk-!-padding-top-0 govuk-!-padding-bottom-0">
+  <div style="background:#0b0c0c;height:250px;background-image:url('/static/img/tirez.png')"></div>
+  {% include "by-vehicle.njk" %}
+  <div class="govuk-width-container">
+    <h2 id="summary-count"></h2>
+    <div id="filter-summary" class="govuk-grid-row govuk-!-padding-bottom-3"">
+      {# <div class="govuk-grid-column-one-third"style="margin-bottom:20px;"></div> #}
       <div class="govuk-grid-column-one-third"style="margin-bottom:20px;">
         <label class="govuk-label">Sort by</label>
         <select id="sortPrice" class="govuk-select">
@@ -31,7 +40,7 @@ split:
   </div>
   <div class="govuk-width-container">
     <div id="tire-results" class="govuk-!-margin-top-0"></div>
-    <div id="pager" class="govuk-!-margin-top-3"></div>
+    <nav id="pager" class="govuk-pagination govuk-!-margin-top-3"></div>
   </div>
 </section>
 {# {% set collectionHeader = "New Arrivals" %} #}

@@ -1,21 +1,9 @@
-{# ---
-layout: "layout.njk"
-title: "Find Tires by Vehicle"
-permalink: "/tires/by-vehicle/"
---- #}
-<div style="background-image: url('static/img/tires.png'); height:300px;      background-size: cover;  margin-bottom:50px;height: 250px;
-    background-position-y: center;"></div>
-<div class="govuk-width-container" >
-  {# <h1 class="govuk-heading-xl" style="color:white;margin-top:50px;" >Find used tires in Calgary</h1> #}
+<div style="background:black;padding-top:30px;">
+  <div class="govuk-width-container">
+    <form id="veh-form">
+      <div class="tire-filter" >
 
-  {# <h1 style="margin-top:40px;color:white" class="govuk-heading-xl">Find used tires in Calgary </h2> #}
-
-  {# <h2>Find Tires by Vehicle</h2> #}
-
-  <form id="veh-form">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-quarter">
-        <div class="govuk-form-group">
+        <div class="govuk-form-group" style="width:100%;">
           <select class="govuk-select" id="make">
             <option value="">Make</option>
             <option value="acura">Acura</option>
@@ -53,23 +41,81 @@ permalink: "/tires/by-vehicle/"
             <option value="volvo">Volvo</option>
           </select>
         </div>
-      </div>
 
-      <div class="govuk-grid-column-one-quarter">
-        <div class="govuk-form-group">
+        <div class="govuk-form-group" style="width:100%;"">
           <select disabled class="govuk-select" id="year">
             <option value=""> Year </option>
           </select>
         </div>
-      </div>
-
-      <div class="govuk-grid-column-one-quarter">
-        <div class="govuk-form-group">
+        <div class="govuk-form-group" style="width:100%;"">
           <select disabled class="govuk-select" id="model">
             <option value="">Model</option>
           </select>
         </div>
+        <div class="govuk-form-group" style="width:100%;">
+          <select class="govuk-select" id="mod" disabled>
+            <option value="">Trim</option>
+          </select>
+        </div>
+        <button style="width:100%;" disabled class="govuk-button" id="submit" type="submit">Find Tires</button>
       </div>
+      {# <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-form-group">
+            <select class="govuk-select" id="make">
+              <option value="">Make</option>
+              <option value="acura">Acura</option>
+              <option value="alfa romeo">Alfa Romeo</option>
+              <option value="aston martin">Aston Martin</option>
+              <option value="audi">Audi</option>
+              <option value="bmw">BMW</option>
+              <option value="buick">Buick</option>
+              <option value="cadillac">Cadillac</option>
+              <option value="chevrolet">Chevrolet</option>
+              <option value="ferrari">Ferrari</option>
+              <option value="ford">Ford</option>
+              <option value="genesis">Genesis</option>
+              <option value="gmc">GMC</option>
+              <option value="honda">Honda</option>
+              <option value="hyundai">Hyundai</option>
+              <option value="ineos">INEOS</option>
+              <option value="jaguar">Jaguar</option>
+              <option value="kia">Kia</option>
+              <option value="lamborghini">Lamborghini</option>
+              <option value="lexus">Lexus</option>
+              <option value="lincoln">Lincoln</option>
+              <option value="lotus">Lotus</option>
+              <option value="lucid">Lucid</option>
+              <option value="maserati">Maserati</option>
+              <option value="mazda">Mazda</option>
+              <option value="nissan">Nissan</option>
+              <option value="polestar">Polestar</option>
+              <option value="porsche">Porsche</option>
+              <option value="rivian">Rivian</option>
+              <option value="rolls-royce">Rolls-Royce</option>
+              <option value="subaru">Subaru</option>
+              <option value="toyota">Toyota</option>
+              <option value="tesla">Tesla</option>
+              <option value="volvo">Volvo</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-form-group">
+            <select disabled class="govuk-select" id="year">
+              <option value=""> Year </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-form-group">
+            <select disabled class="govuk-select" id="model">
+              <option value="">Model</option>
+            </select>
+          </div>
+        </div> 
 
       <div class="govuk-grid-column-one-quarter">
         <div class="govuk-form-group">
@@ -79,19 +125,10 @@ permalink: "/tires/by-vehicle/"
         </div>
       </div>
     </div>
-    <button disabled class="govuk-button" id="submit" type="submit">Find Tires</button>
-  </form>
-  {# <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-third govuk-!-padding-bottom-6">
-      <select id="sortPrice" class="govuk-select">
-        <option value="">Default</option>
-        <option value="asc">Price: Low to High</option>
-        <option value="desc">Price: High to Low</option>
-      </select>
-    </div>
-  </div> #}
-  <!-- simple results area -->
-  {# <div id="tire-results" class="govuk-!-margin-top-3"></div> #}
+    #}
+
+    </form>
+  </div>
 
   <!-- optional debug output -->
   <pre id="out" style="margin-top:1rem;background:#f6f6f6;padding:1rem; display:none;"></pre>
@@ -103,6 +140,8 @@ permalink: "/tires/by-vehicle/"
   const resultsEl = $("#tire-results");
   const debugEl = $("#out");
   const submit = $("#submit");
+  const filterSummary = $("#summary-count");
+
 async function fetchJSON(url, body) {
   const r = await fetch(url, {
     method: "POST",
@@ -123,7 +162,9 @@ let state = {
   results: [],      // full current dataset
   page: 1,          // current page (1-based)
   perPage: 6,      // items per page
-  sort: ""          // "", "asc", "desc"
+  sort: "",         // "", "asc", "desc"
+  resultsCount: 0,
+  sizes: []
 };
 
 function renderPager(total, page, perPage) {
@@ -170,35 +211,11 @@ function renderPager(total, page, perPage) {
  
 }
 
-// Build/replace sort dropdown hooked into state.sort
-function buildSortControl(results) {
-  resultsEl.querySelector("#sortPrice")?.closest(".sort-wrap")?.remove();
-
-  const sortWrap = document.createElement("div");
-  sortWrap.className = "sort-wrap govuk-!-margin-bottom-3";
-  sortWrap.innerHTML = `
-    <label class="govuk-label" for="sortPrice">Sort by</label>
-    <select id="sortPrice" class="govuk-select">
-      <option value="" ${state.sort===""?"selected":""}>Default</option>
-      <option value="asc" ${state.sort==="asc"?"selected":""}>Price: Low to High</option>
-      <option value="desc" ${state.sort==="desc"?"selected":""}>Price: High to Low</option>
-    </select>
-  `;
-
-  const sortSel = resultsEl.querySelector("#sortPrice");
-  sortSel.addEventListener("change", () => {
-    state.sort = sortSel.value;
-    state.page = 1;
-    renderList();
-  });
-  return sortWrap;
-}
-
-
 // Setter: whenever you have a new result set (all tires OR filtered)
 function setResults(list) {
   state.results = Array.isArray(list) ? list : [];
   state.page = 1;
+  state.resultsCount = list.length;
   renderList();
 }
 
@@ -222,6 +239,11 @@ function renderList() {
   const start = (state.page - 1) * state.perPage;
   const pageItems = sorted.slice(start, start + state.perPage);
 
+  filterSummary.textContent="";
+  const summary = document.createElement('p');
+  summary.textContent = state.resultsCount + " Results";
+  filterSummary.appendChild(summary);
+ 
   renderCards(pageItems);
   renderPager(total, state.page, state.perPage);
 }
@@ -254,7 +276,7 @@ resultsEl.firstElementChild?.remove();
     const a = document.createElement("a");
     a.classList.add("govuk-link", "govuk-link--no-visited-state", "dfe-card-link--header");
     a.href = `/tires/${t.sku || ""}`;
-    a.textContent = t.title || "Unnamed tire";
+    a.textContent = t.title + " "+ t.size || "Unnamed tire";
     h3.appendChild(a);
     inner.appendChild(h3);
 
@@ -263,11 +285,7 @@ resultsEl.firstElementChild?.remove();
     price.textContent = "$"+t.price;
    
     inner.appendChild(price);
-    // Size
-    const p = document.createElement("p");
-    p.classList.add("govuk-body");
-    p.textContent = t.size || "";
-    inner.appendChild(p);
+   
     card.appendChild(inner);
 
     container.appendChild(card);
@@ -281,14 +299,14 @@ async function loadAllTiresFromJSON() {
     const res = await fetch("/api/tires.json", { headers: { accept: "application/json" }});
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const all = await res.json();
-
     resultsEl.innerHTML = "";
-   
-    setResults(all);                              // paginate + render
+    setResults(all);   
+                            // paginate + render
   } catch (err) {
     resultsEl.innerHTML = `<p class="govuk-error-message">Failed to load tires: ${err.message}</p>`;
   }
 }
+
 // call once at the end of your script
 loadAllTiresFromJSON();
 
@@ -365,6 +383,7 @@ async function loadMods() {
     resultsEl.textContent = e.message;
   }
 }
+
 make.addEventListener("change", loadYears);
 year.addEventListener("change", loadModels);
 model.addEventListener("change", loadMods);
@@ -391,15 +410,13 @@ document.getElementById("veh-form").addEventListener("submit", async (e) => {
 
   const sizes = data.sizesNormalized?.length ? data.sizesNormalized : (data.sizes || []);
   const filtersBar = document.createElement('div');
-  filtersBar.className = 'govuk-!-margin-top-3 govuk-!-margin-bottom-2';
-  filtersBar.innerHTML = sizes?.length
-  ? `<p class="govuk-body govuk-!-margin-bottom-1"><strong>Compatible Sizes</strong></p>
-    <div class="filters">
-      ${sizes.map(s => `<span class="govuk-tag">${s}</span>`).join('')}
-    </div>`
-  : `<p class="govuk-body govuk-!-margin-bottom-1"><strong>Filtering by size:</strong> (none)</p>`;
-
+    
   const results = data.results || [];
+  state.results = results;
+
+  state.resultsCount = results.length;
+  state.sizes = sizes;
+  console.log(state.sizes);
     if (!results.length) {
       const sizes = (data.sizesNormalized || data.sizes || []).join(", ");
       resultsEl.innerHTML = `<p>No matching tires found.</p>${sizes ? `<p><small>Sizes: ${sizes}</small></p>` : ""}`;
@@ -410,8 +427,7 @@ document.getElementById("veh-form").addEventListener("submit", async (e) => {
 
 // Replace results
 resultsEl.innerHTML = "";
-resultsEl.appendChild(filtersBar);
-renderCards(results);
+renderList();
   } catch (err) {
     resultsEl.textContent = `Error: ${err.message}`;
   }

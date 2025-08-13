@@ -306,6 +306,54 @@ html, body {
 }
 
 
+
+.govuk-heading-xxl {
+  color: #0b0c0c;
+  font-family: "GDS Transport", arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 1.09375;
+  display: block;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+@media print {
+  .govuk-heading-xl {
+    color: #000000;
+  }
+}
+
+@media print {
+  .govuk-heading-xl {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .govuk-heading-xxl {
+    font-size: 5rem;
+    line-height: 1.0416666667;
+    max-width: 45rem !important;
+  }
+}
+
+@media print {
+  .govuk-heading-xl {
+    font-size: 32pt;
+    line-height: 1.15;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .govuk-heading-xl {
+    margin-bottom: 50px;
+  }
+}
+
+
 .govuk-heading-xl {
   color: #0b0c0c;
   font-family: "GDS Transport", arial, sans-serif;
@@ -7263,6 +7311,115 @@ input, textarea, select, button {
 .govuk-tag {
   margin-right: 5px;
   margin-top: 10px;
+}
+
+.tire-filter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  gap: 10px;
+
+  z-index: 10;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .tire-filter {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+}
+
+.tire-landing {
+  background: #0b0c0c;
+  /* background-image: url('../img/tires.png'); */
+  height: 100%;
+  background-size: cover;
+  background-position-y: center;
+  z-index: 10;
+  position: relative;
+
+}
+
+@media (min-width: 640px) {
+  /* .tire-landing {
+    min-height: 400px;
+  } */
+}
+
+.tire-sticker {
+  display: none;
+  position: absolute;
+  z-index: -1;
+
+  /* width: 50vw; */
+  width: 600px;
+  right: 40vw;
+  /* top: 5vw; */
+  min-width: 300px;
+  top: 200px;
+}
+
+.tire-landing {
+  overflow: hidden;
+}
+
+body {
+  overflow: hidden;
+}
+
+.tire-sticker-2 {
+  display: none;
+  position: absolute;
+  z-index: -1;
+  right: 300px;
+  width: 50vw;
+  width: 500px;
+  right: 50vw;
+
+  bottom: 20vw;
+  min-width: 300px;
+
+}
+
+.tire-sticker-3 {
+  display: none;
+  position: absolute;
+  z-index: -1;
+  width: 400px;
+  right: 500px;
+  top: 250px;
+  /* width: 50vw; */
+  min-width: 300px;
+  max-width: 500px;
+}
+
+/* 
+@media (min-width: 640px) {
+  .tire-sticker {
+    position: absolute;
+    z-index: -1;
+    right: -100px;
+    width: 50vw;
+    min-width: 300px;
+  }
+
+  .tire-sticker-2 {
+    position: absolute;
+    z-index: -1;
+    width: 400px;
+    right: 300px;
+    top: 200px;
+    width: 50vw;
+    min-width: 300px;
+    max-width: 500px;
+  }
+} */
+
+.tire-filter-wrapper {
+  position: relative;
+  z-index: 10;
 }
 
 /*# sourceMappingURL=styles.css.map */
