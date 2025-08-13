@@ -141,6 +141,7 @@
   const debugEl = $("#out");
   const submit = $("#submit");
   const filterSummary = $("#summary-count");
+  const compatibleSizes =$('#compatible-sizes');
 
 async function fetchJSON(url, body) {
   const r = await fetch(url, {
@@ -243,6 +244,8 @@ function renderList() {
   const summary = document.createElement('p');
   summary.textContent = state.resultsCount + " Results";
   filterSummary.appendChild(summary);
+
+  
  
   renderCards(pageItems);
   renderPager(total, state.page, state.perPage);
@@ -413,6 +416,16 @@ document.getElementById("veh-form").addEventListener("submit", async (e) => {
     
   const results = data.results || [];
   state.results = results;
+
+  state.compatibleSizes = data.sizesNormalized;
+
+  compatibleSizes.textContent="";
+  const compatible = state.compatibleSizes.map((item)=>{
+    const size = document.createElement('span');
+    size.textContent=item+", ";
+    compatibleSizes.appendChild(size);
+  })
+
 
   state.resultsCount = results.length;
   state.sizes = sizes;
