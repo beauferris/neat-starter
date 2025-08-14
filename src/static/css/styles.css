@@ -6,6 +6,7 @@ html, body {
 }
 
 :root {
+  --green: rgb(52, 69, 50);
   --bd-highlight: #f5ed30;
   --main-color: hsla(240, 71%, 13%, 1);
   --hightlight: var(--main-color);
@@ -334,7 +335,7 @@ html, body {
 
 @media (min-width: 40.0625em) {
   .govuk-heading-xxl {
-    font-size: 5rem;
+    font-size: 4.3rem;
     line-height: 1.0416666667;
     max-width: 45rem !important;
   }
@@ -7496,8 +7497,12 @@ body {
   -webkit-border-radius: 0;
   padding-left: 10px;
 
+
 }
 
+/* select, .pill-select {
+  cursor: pointer;
+} */
 
 .pill-start {
 
