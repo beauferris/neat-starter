@@ -298,7 +298,7 @@ resultsEl.firstElementChild?.remove();
 
 async function loadAllTiresFromJSON() {
   try {
-    resultsEl.innerHTML = `<p class="govuk-body">Loading all tires…</p>`;
+    resultsEl.innerHTML = `<div class="loader"></div>`;
     const res = await fetch("/api/tires.json", { headers: { accept: "application/json" }});
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const all = await res.json();
@@ -402,7 +402,7 @@ sortPrice.addEventListener("change", () => {
 //fetch data
 document.getElementById("veh-form").addEventListener("submit", async (e) => {
   e.preventDefault();
-  resultsEl.textContent = "Loading…";
+  resultsEl.innerHTML = `<div class="loader"></div>`;
 
   if (!mod.value) { resultsEl.textContent = "Pick a modification first."; return; }
 
