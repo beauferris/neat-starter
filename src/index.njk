@@ -24,11 +24,9 @@ split:
   {# <div style="background:#0b0c0c;height:250px;background-image:url('/static/img/tires.png');background-size:cover;"></div> #}
   {% include "by-vehicle.njk" %}
 
-  <div class="govuk-width-container">
-    <h2 id="summary-count"></h2>
-    <h2 id="compatible-sizes"></h2>
+  <div id="filter-summary-wrapper"class="govuk-width-container">
 
-    <div id="filter-summary" class="govuk-grid-row govuk-!-padding-bottom-3"">
+    <div id="filter-summary" style="margin-top:40px;" class="govuk-grid-row govuk-!-padding-bottom-3"">
       {# <div class="govuk-grid-column-one-third"style="margin-bottom:20px;"></div> #}
       <div class="govuk-grid-column-one-third"style="margin-bottom:20px;">
         <label class="govuk-label">Sort by</label>
@@ -42,6 +40,8 @@ split:
     </div>
   </div>
   <div class="govuk-width-container">
+    <div id="compatible-sizes"></div>
+    <h2 id="summary-count"></h2>
     <div id="tire-results" class="govuk-!-margin-top-0"></div>
     <nav id="pager" class="govuk-pagination govuk-!-margin-top-3"></div>
   </div>

@@ -184,7 +184,9 @@ function renderPager(total, page, perPage) {
     } else {
       a.addEventListener("click", () => {
         state.page = targetPage;
+
         renderList();
+        document.getElementById('filter-summary-wrapper').scrollIntoView({ behavior: 'smooth' });
       });
     }
     if (isCurrent) {
@@ -218,6 +220,7 @@ function setResults(list) {
   state.page = 1;
   state.resultsCount = list.length;
   renderList();
+  
 }
 
 function applySort(items, sort) {
@@ -246,9 +249,10 @@ function renderList() {
   filterSummary.appendChild(summary);
 
   
- 
+  
   renderCards(pageItems);
   renderPager(total, state.page, state.perPage);
+  
 }
 
 function renderCards(items){
@@ -354,7 +358,7 @@ async function loadModels() {
     }
 
     model.innerHTML = `<option value="">Model</option>` +
-      data.models.map(m => `<option value="${m.label}">${m.label}</option>`).join("");
+      data.models.map(m => `<option value="${m.id}">${m.label}</option>`).join("");
     model.disabled = false;
     
   } catch (e) {
@@ -402,6 +406,8 @@ sortPrice.addEventListener("change", () => {
 //fetch data
 document.getElementById("veh-form").addEventListener("submit", async (e) => {
   e.preventDefault();
+          document.getElementById('filter-summary-wrapper').scrollIntoView({ behavior: 'smooth' });
+
   resultsEl.innerHTML = `<div class="loader"></div>`;
 
   if (!mod.value) { resultsEl.textContent = "Pick a modification first."; return; }
@@ -422,7 +428,8 @@ document.getElementById("veh-form").addEventListener("submit", async (e) => {
   compatibleSizes.textContent="";
   const compatible = state.compatibleSizes.map((item)=>{
     const size = document.createElement('span');
-    size.textContent=item+", ";
+    size.classList.add("govuk-tag");
+    size.textContent=item+" ";
     compatibleSizes.appendChild(size);
   })
 
