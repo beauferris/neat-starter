@@ -9,7 +9,7 @@ split:
   image: "db.png"
 ---
 
-<section  class="tire-landing govuk-!-margin-top-0 govuk-!-padding-top-7 govuk-!-padding-bottom-0">
+{# <section  class="tire-landing govuk-!-margin-top-0 govuk-!-padding-top-7 govuk-!-padding-bottom-0" >
 
   <img class="tire-sticker-2" src="/static/img/tire2.png" ></img>
   <img class="tire-sticker-3" src="/static/img/tire2.png" ></img>
@@ -18,10 +18,10 @@ split:
     <h1 class="govuk-heading-xxl" style="max-width:35rem;color:white;" >Find your next pair of tires</h1>
     <p class="govuk-body-lead" style="color:white;">Free delivery anywhere in Calgary</p>
   </div>
-</section>
+</section> #}
 
 <section class="tire-filter-wrapper {{color}} tire govuk-!-margin-top-0 govuk-!-padding-top-0 govuk-!-padding-bottom-0">
-  {# <div style="background:#0b0c0c;height:250px;background-image:url('/static/img/tires.png');background-size:cover;"></div> #}
+  <div class="tire-img"></div>
   {% include "by-vehicle.njk" %}
 
   <div id="filter-summary-wrapper"class="govuk-width-container">
@@ -29,6 +29,7 @@ split:
     <div id="filter-summary" style="margin-top:40px;" class="govuk-grid-row govuk-!-padding-bottom-3"">
       {# <div class="govuk-grid-column-one-third"style="margin-bottom:20px;"></div> #}
       <div class="govuk-grid-column-one-third"style="margin-bottom:20px;">
+
         <label class="govuk-label">Sort by</label>
         <select id="sortPrice" class="govuk-select">
           <option value="">Default</option>
@@ -37,6 +38,15 @@ split:
         </select>
 
       </div>
+      {# <div class="govuk-grid-column-one-third"style="margin-bottom:20px;">
+        <label class="govuk-label">Type</label>
+        <select id="filter-type" class="govuk-select">
+          <option value="">Default</option>
+          <option value="asc">All Season</option>
+          <option value="desc">Price: High to Low</option>
+        </select>
+
+      </div> #}
     </div>
   </div>
   <div class="govuk-width-container">

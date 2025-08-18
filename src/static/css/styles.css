@@ -6,9 +6,11 @@ html, body {
 }
 
 :root {
+  --bd-navy: hsla(240, 71%, 13%, 1);
   --green: rgb(52, 69, 50);
   --bd-highlight: #f5ed30;
-  --main-color: hsla(240, 71%, 13%, 1);
+  --main-color: var(--green);
+  /* --main-color: hsla(240, 71%, 13%, 1); */
   --hightlight: var(--main-color);
   --db-red: #a03836;
   /* --db-red: #007A3D; */
@@ -34,6 +36,7 @@ html, body {
 
   --border-main: 1px solid #b1b4b6;
 }
+
 
 
 
@@ -3760,7 +3763,7 @@ html, body {
   font-size: 0.875rem;
   line-height: 1;
   border-bottom: 10px solid #ffffff;
-  background: #0b0c0c;
+  background: var(--green);
   color: #ffffff;
 }
 
@@ -7333,6 +7336,7 @@ input, textarea, select, button {
   justify-content: space-between;
   gap: 0px;
   flex-direction: column;
+
 }
 
 .govuk-form-group:has(.pill-select) {
@@ -7345,23 +7349,26 @@ input, textarea, select, button {
     flex-direction: row;
     justify-content: space-between;
     gap: 0px;
+    height: 55px;
   }
 }
 
 .tire-landing {
-  background: #0b0c0c;
+  background: var(--green);
   /* background-image: url('../img/tires.png'); */
   height: 100%;
-  background-size: cover;
-  background-position-y: center;
+  background-size: contain;
+  background-position-y: top;
+  background-repeat: no-repeat;
   z-index: 10;
   position: relative;
+  background-position-y: bottom;
 
 }
 
 @media (min-width: 640px) {
   .tire-landing {
-    min-height: 250px;
+    /* height: 450px; */
   }
 }
 
@@ -7566,7 +7573,8 @@ body {
   z-index: 2;
   height: 220px;
   background-repeat: no-repeat;
-  animation: spin 2s linear infinite;
+  animation: spin 5s linear infinite;
+  text-align: center;
 }
 
 @keyframes spin {
@@ -7577,6 +7585,36 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.govuk-button[disabled] {
+  opacity: 1;
+}
+
+.tire-filter-wrap {
+  background-image: url("/static/img/tires.png") !important;
+  background: var(--green);
+  padding-top: 30px;
+  padding-bottom: 30px;
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+}
+
+/* .tire-img {
+  background: #0b0c0c;
+  height: 250px;
+  background-image: url('/static/img/tires.png');
+  background-size: cover;
+  background-position-y: center;
+  overflow: visible;
+} */
+.tire-filter-widget {
+  background-color: black;
+  padding: 25px;
+  border-radius: 10px;
+  /* opacity: .9; */
 }
 
 /*# sourceMappingURL=styles.css.map */

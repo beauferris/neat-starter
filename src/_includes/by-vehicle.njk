@@ -1,65 +1,69 @@
-<div style="background:black;padding-top:30px;">
-  <div class="govuk-width-container">
-    <form id="veh-form">
-      <div class="tire-filter" >
+<div class="tire-filter-wrap">
 
-        <div class="govuk-form-group select pill-start" style="width:100%;">
-          <select class="govuk-select pill-select pill-start" id="make">
-            <option value="">Make</option>
-            <option value="acura">Acura</option>
+  <div class="govuk-width-container" style="width:100%">
+    <div class="tire-filter-widget">
+      <h2 class="govuk-heading-l" style="color:white"> Search Tires</h2>
+      <form id="veh-form">
+        {# <h2 class="govuk-heading-xl" style="color:white">Find you next pair of tires</h2> #}
+        <div class="tire-filter" >
 
-            <option value="aston martin">Aston Martin</option>
-            <option value="audi">Audi</option>
-            <option value="bmw">BMW</option>
-            <option value="buick">Buick</option>
-            <option value="cadillac">Cadillac</option>
-            <option value="chevrolet">Chevrolet</option>
-            <option value="ferrari">Ferrari</option>
-            <option value="ford">Ford</option>
-            <option value="genesis">Genesis</option>
-            <option value="gmc">GMC</option>
-            <option value="honda">Honda</option>
-            <option value="hyundai">Hyundai</option>
+          <div class="govuk-form-group select pill-start" style="width:100%;">
+            <select class="govuk-select pill-select pill-start" id="make">
+              <option value="">Make</option>
+              <option value="acura">Acura</option>
 
-            <option value="jaguar">Jaguar</option>
-            <option value="kia">Kia</option>
-            <option value="lamborghini">Lamborghini</option>
-            <option value="lexus">Lexus</option>
-            <option value="lincoln">Lincoln</option>
-            <option value="lotus">Lotus</option>
-            <option value="lucid">Lucid</option>
-            <option value="maserati">Maserati</option>
-            <option value="mazda">Mazda</option>
-            <option value="nissan">Nissan</option>
-            <option value="polestar">Polestar</option>
-            <option value="porsche">Porsche</option>
-            <option value="rivian">Rivian</option>
-            <option value="rolls-royce">Rolls-Royce</option>
-            <option value="subaru">Subaru</option>
-            <option value="toyota">Toyota</option>
-            <option value="tesla">Tesla</option>
-            <option value="volvo">Volvo</option>
-          </select>
-        </div>
+              <option value="aston martin">Aston Martin</option>
+              <option value="audi">Audi</option>
+              <option value="bmw">BMW</option>
+              <option value="buick">Buick</option>
+              <option value="cadillac">Cadillac</option>
+              <option value="chevrolet">Chevrolet</option>
+              <option value="ferrari">Ferrari</option>
+              <option value="ford">Ford</option>
+              <option value="genesis">Genesis</option>
+              <option value="gmc">GMC</option>
+              <option value="honda">Honda</option>
+              <option value="hyundai">Hyundai</option>
 
-        <div class="govuk-form-group select" style="width:100%;"">
-          <select disabled class="govuk-select pill-select" id="year">
-            <option value=""> Year </option>
-          </select>
+              <option value="jaguar">Jaguar</option>
+              <option value="kia">Kia</option>
+              <option value="lamborghini">Lamborghini</option>
+              <option value="lexus">Lexus</option>
+              <option value="lincoln">Lincoln</option>
+              <option value="lotus">Lotus</option>
+              <option value="lucid">Lucid</option>
+              <option value="maserati">Maserati</option>
+              <option value="mazda">Mazda</option>
+              <option value="nissan">Nissan</option>
+              <option value="polestar">Polestar</option>
+              <option value="porsche">Porsche</option>
+              <option value="rivian">Rivian</option>
+              <option value="rolls-royce">Rolls-Royce</option>
+              <option value="subaru">Subaru</option>
+              <option value="toyota">Toyota</option>
+              <option value="tesla">Tesla</option>
+              <option value="volvo">Volvo</option>
+            </select>
+          </div>
+
+          <div class="govuk-form-group select" style="width:100%;"">
+            <select disabled class="govuk-select pill-select" id="year">
+              <option value=""> Year </option>
+            </select>
+          </div>
+          <div class="govuk-form-group select" style="width:100%;"">
+            <select disabled class="govuk-select pill-select" id="model">
+              <option value="">Model</option>
+            </select>
+          </div>
+          <div class="govuk-form-group select" style="width:100%;">
+            <select class="govuk-select pill-select" id="mod" disabled>
+              <option value="">Trim</option>
+            </select>
+          </div>
+          <button style="width:100%;" disabled class="govuk-button  pill-select pill-end" id="submit" type="submit">Find Tires</button>
         </div>
-        <div class="govuk-form-group select" style="width:100%;"">
-          <select disabled class="govuk-select pill-select" id="model">
-            <option value="">Model</option>
-          </select>
-        </div>
-        <div class="govuk-form-group select" style="width:100%;">
-          <select class="govuk-select pill-select" id="mod" disabled>
-            <option value="">Trim</option>
-          </select>
-        </div>
-        <button style="width:100%;" disabled class="govuk-button  pill-select pill-end" id="submit" type="submit">Find Tires</button>
-      </div>
-      {# <div class="govuk-grid-row">
+        {# <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-quarter">
           <div class="govuk-form-group">
             <select class="govuk-select" id="make">
@@ -127,7 +131,8 @@
     </div>
     #}
 
-    </form>
+      </form>
+    </div>
   </div>
 
   <!-- optional debug output -->
@@ -220,7 +225,6 @@ function setResults(list) {
   state.page = 1;
   state.resultsCount = list.length;
   renderList();
-  
 }
 
 function applySort(items, sort) {
@@ -247,8 +251,6 @@ function renderList() {
   const summary = document.createElement('p');
   summary.textContent = state.resultsCount + " Results";
   filterSummary.appendChild(summary);
-
-  
   
   renderCards(pageItems);
   renderPager(total, state.page, state.perPage);
@@ -318,6 +320,7 @@ async function loadAllTiresFromJSON() {
 loadAllTiresFromJSON();
 
 async function loadYears() {
+  submit.disabled =true;
   mod.disabled = true;
   mod.innerHTML = '<option>Trim</option>'
 
@@ -344,6 +347,7 @@ async function loadYears() {
   }
 }
 async function loadModels() {
+  submit.disabled =true;
   mod.disabled = true;
   mod.innerHTML = '<option>Trim</option>'
   model.innerHTML = `<option>Loading…</option>`;
@@ -368,6 +372,7 @@ async function loadModels() {
 }
 const cache = new Map();
 async function loadMods() {
+  submit.disabled =true;
   const key = `${make.value}|${model.value}|${year.value}`;
   mod.disabled = true;
   mod.innerHTML = `<option>Loading…</option>`;
@@ -382,9 +387,10 @@ async function loadMods() {
       return;
     }
     mod.innerHTML = `<option value="">Trim</option>` +
-      data.modifications.map(m => `<option value="${m.id}">${m.label}</option>`).join("");
+    data.modifications.map(m => `<option value="${m.id}">${m.label}</option>`).join("");
     mod.disabled = false;
-    submit.disabled =false;
+    
+    
   } catch (e) {
     mod.innerHTML = `<option value="">Error loading modifications</option>`;
     resultsEl.textContent = e.message;
@@ -394,6 +400,10 @@ async function loadMods() {
 make.addEventListener("change", loadYears);
 year.addEventListener("change", loadModels);
 model.addEventListener("change", loadMods);
+
+mod.addEventListener("change", ()=>{
+  submit.disabled =false;
+})
 
 sortPrice.addEventListener("change", () => {
   state.sort = sortPrice.value;

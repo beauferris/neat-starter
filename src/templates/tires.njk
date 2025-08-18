@@ -11,10 +11,12 @@ permalink: "tires/{{ tire.data.sku | slugify }}/"
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half">
         <h1 class="govuk-heading-xl" >{{ tire.data.title }}</h2>
+
+        <h2>{{tire.data.category}}</h2>
         <h2 class="govuk-heading-l">${{ tire.data.price }}</h2>
-        <h3>Size: {{ tire.data.size }}</h3>
-        <h3>Tread: {{tire.data.tread}}</h3>
-        <h3>Quantity: {{tire.data.quantity}}</h3>
+        <h3 class="govuk-heading-m"  >Size: {{ tire.data.size }}</h3>
+        <h3 class="govuk-heading-m" >Tread: {{tire.data.tread}}</h3>
+        <h3 class="govuk-heading-m">Quantity: {{tire.data.quantity}}</h3>
 
         <a href="{{site.phone}}" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
           {{site.phone_title}}
