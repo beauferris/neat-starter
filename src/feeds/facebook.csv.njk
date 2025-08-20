@@ -4,48 +4,17 @@ layout: false
 eleventyExcludeFromCollections: true
 ---
 {%- set base = "https://yoyotires.netlify.app" -%}
-
-{%- if (not settings or not settings.url) and metadata and metadata.url -%}{% set base = metadata.url %}
-{%- endif -%}
-
 id,title,description,availability,condition,price,link,image_link,brand,mpn,item_group_id
-{%- for t in collections.tires -%}
-  {# ---- sku ---- #}
-  {%- set sku = t.data.sku -%}
-  {%- if not sku or sku == "" -%}{% set sku = t.fileSlug %}
-  {%- endif -%}
-  {%- set sku = sku | slugify -%}
-
-  {# ---- title ---- #}
-  {%- set title = t.data.title -%}
-  {%- if not title or title == "" -%}
-    {%- set title = t.data.brand -%}
-    {%- if t.data.model -%}{% set title = title ~ " " ~ t.data.model %}
-    {%- endif -%}
-  {%- endif -%}
-
-  {# ---- description ---- #}
+{% for t in collections.tires -%}
+  {%- set sku = (t.data.sku or t.fileSlug) | slugify -%}
+  {%- set title = t.data.title or (t.data.brand ~ " " ~ (t.data.model or "")) -%}
   {%- set desc = (t.templateContent or "") | striptags -%}
-
-  {# ---- availability ---- #}
-  {%- set avail = "out of stock" -%}
   {%- if t.data.inStock -%}{% set avail = "in stock" %}
+  {%- else -%}{% set avail = "out of stock" %}
   {%- endif -%}
-
-  {# ---- condition ---- #}
   {%- set cond = "used" -%}
-
-  {# ---- price ---- #}
-  {%- set priceNum = t.data.price -%}
-  {%- if not priceNum -%}{% set priceNum = 0 %}
-  {%- endif -%}
-  {%- set price = priceNum ~ " CAD" -%}
-
-  {# ---- link (works even if permalink:false) ---- #}
-  {%- set linkPath = "/tires/" ~ sku ~ "/" -%}
-  {%- set link = linkPath | abs(base) -%}
-
-  {# ---- image (string or {src}) -> absolute ---- #}
+  {%- set price = ((t.data.price or 0) ~ " CAD") -%}
+  {%- set link = ("/tires/" ~ sku ~ "/") | abs(base) -%}
   {%- set rawImg = "/static/img/no-image.png" -%}
   {%- if t.data.images and t.data.images[0] -%}
     {%- if t.data.images[0].src -%}{% set rawImg = t
@@ -58,14 +27,9 @@ id,title,description,availability,condition,price,link,image_link,brand,mpn,item
     {%- endif -%}
   {%- endif -%}
   {%- set image = rawImg | abs(base) -%}
-
-  {# ---- brand/mpn/group ---- #}
-  {%- set brand = t.data.brand -%}
-  {%- if not brand -%}{% set brand = "" %}
-  {%- endif -%}
+  {%- set brand = t.data.brand or "" -%}
   {%- set mpn = sku -%}
-  {%- set group = sku -%}
+  {%- set group = (t.data.brand or "") ~ "-" ~ (t.data.model or "") | slugify -%}
 
-  {{ sku  | csv }},{{ title | csv }},{{ desc  | csv }},{{ avail | csv }},{{ cond  | csv }},
-{{ price| csv }},{{ link  | csv }},{{ image | csv }},{{ brand | csv }},{{ mpn  | csv }},{{ group | csv }}
-{%- endfor -%}
+  {{ sku|csv }},{{ title|csv }},{{ desc|csv }},{{ avail|csv }},{{ cond|csv }},{{ price|csv }},{{ link|csv }},{{ image|csv }},{{ brand|csv }},{{ mpn|csv }},{{ group|csv }}
+{% endfor %}
