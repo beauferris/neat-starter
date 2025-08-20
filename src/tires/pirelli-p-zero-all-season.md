@@ -11,3 +11,4 @@ inStock: true
 images:
   - /static/img/530366256_1546216429679230_3621015224324892949_n.jpg
 ---
+Wondering if these will fit? visit our website yoyotires.ca to check if they will fit.
