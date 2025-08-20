@@ -1,8 +1,7 @@
 const yaml = require("js-yaml");
 const { DateTime } = require("luxon");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const htmlmin = require("html-minifier");
-
+const nunjucks = require("nunjucks");
 module.exports = function (eleventyConfig) {
   // put near the top of your config
   eleventyConfig.addWatchTarget("src/admin"); // hot-reload when config changes
@@ -35,6 +34,7 @@ module.exports = function (eleventyConfig) {
     "./node_modules/prismjs/themes/prism-tomorrow.css":
       "./static/css/prism-tomorrow.css",
   });
+
   eleventyConfig.addCollection("tires", (collectionApi) => {
     return collectionApi.getFilteredByGlob("src/tires/*.md");
   });
@@ -42,6 +42,24 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("./src/favicon.ico");
   eleventyConfig.addPassthroughCopy({ "src/static": "static" });
 
+  eleventyConfig.addFilter("csv", (v = "") => {
+    const s =
+      '"' +
+      String(v)
+        .replace(/\r?\n|\r/g, " ")
+        .trim()
+        .replace(/"/g, '""') +
+      '"';
+    return new nunjucks.runtime.SafeString(s);
+  });
+
+  eleventyConfig.addFilter("abs", (path, base) => {
+    try {
+      return new URL(path || "", base || "").toString();
+    } catch {
+      return path || "";
+    }
+  });
   return {
     dir: {
       input: "src",
