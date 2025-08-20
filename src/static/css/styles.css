@@ -7600,10 +7600,11 @@ body {
   background: var(--green);
   padding-top: 30px;
   padding-bottom: 30px;
-  min-height: 350px;
+  min-height: 300px;
   display: flex;
   align-items: center;
   background-size: cover;
+  background-position: center;
 }
 
 /* .tire-img {
