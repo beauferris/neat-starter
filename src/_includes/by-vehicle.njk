@@ -180,30 +180,43 @@ function renderPager(total, page, perPage) {
   const totalPages = Math.ceil(total / perPage);
 
   const btn = (label, targetPage, disabled=false, isCurrent=false) => {
-    const a = document.createElement("button");
-    a.type = "button";
-    a.className = "govuk-button govuk-button--secondary";
-    a.textContent = label;
+
+
+    const a = document.createElement("li");
+   
+    a.className = "govuk-pagination__item";
+    
+    const link = document.createElement("a");
+    link.className ="govuk-link govuk-pagination__link";
+    link.textContent = label;
+    
+    a.appendChild(link);
+
     if (disabled) {
       a.disabled = true;
     } else {
-      a.addEventListener("click", () => {
+      link.addEventListener("click", () => {
         state.page = targetPage;
 
         renderList();
         document.getElementById('filter-summary-wrapper').scrollIntoView({ behavior: 'smooth' });
       });
     }
+
     if (isCurrent) {
-      a.classList.add("is-current");
-      a.setAttribute("aria-current", "page");
+      link.disabled = true;
+      a.classList.add("govuk-pagination__item--current");
+      link.setAttribute("aria-current", "page");
+      
     }
     return a;
   };
+  if(state.page !== 1){
+ // Prev
+  pagerEl.appendChild(btn("‹ Previous", Math.max(1, page - 1), page === 1));
 
-  // Prev
-  pagerEl.appendChild(btn("‹ Prev", Math.max(1, page - 1), page === 1));
-
+  }
+ 
   // Page numbers (windowed)
   const windowSize = 5;
   let start = Math.max(1, page - Math.floor(windowSize/2));
@@ -214,9 +227,12 @@ function renderPager(total, page, perPage) {
     pagerEl.appendChild(btn(String(p), p, false, p === page));
   }
 
-  // Next
+  if(state.page !== end){
+    // Next
   pagerEl.appendChild(btn("Next ›", Math.min(totalPages, page + 1), page === totalPages));
  
+  }
+  
 }
 
 // Setter: whenever you have a new result set (all tires OR filtered)

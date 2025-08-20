@@ -7622,4 +7622,15 @@ body {
   /* opacity: .9; */
 }
 
+.govuk-pagination__item {
+  cursor: pointer;
+}
+
+.govuk-pagination__item--current {
+  background-color: var(--main-color);
+  color: white;
+}
+
+
+
 /*# sourceMappingURL=styles.css.map */
